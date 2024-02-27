@@ -3,7 +3,7 @@
 using namespace std;
 
 class Person {
-	private:
+	protected:
 		string first_name;
 		string last_name;
 
@@ -29,6 +29,12 @@ class Person {
 		{
 			return first_name + " " + last_name;
 		}
+
+		// Print all info
+		virtual void getFullInfo()
+		{
+			cout << "Name: " << getName() << endl;
+		}
 };
 
 class Employee : public Person{
@@ -49,10 +55,10 @@ class Employee : public Person{
 			return department;
 		}
 
-		// Print all info
-		void getFullInfo()
+		// Print all info (method exists in parent class so we will override)
+		void getFullInfo() override
 		{
-			cout << "Name: " << getName() << endl;
+			cout << "Name: " << first_name+" "+last_name << endl;
 			cout << "Department: " << getDepartment() << endl;
 		}
 };
@@ -60,8 +66,7 @@ class Employee : public Person{
 int main()
 {
 	Person p1("Samuel", "Mariwa");
-
-	cout << p1.getName() << endl;
+	p1.getFullInfo();
 
 	Employee e1("Suki", "Okinawa", "Sales");
 	e1.getFullInfo();
